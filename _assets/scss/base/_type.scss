@@ -1,0 +1,79 @@
+$type-scale: (
+	-2: 0.633em,
+	-1: 0.844em,  // small text
+	0: 1.188rem,  // body text
+	1: 1.333em,  // large text
+	2: 1.777em,   // main heading
+	3: 2.369em,
+	4: 3.157em,
+	5: 5.61em
+);
+
+@function type-scale($level) {
+	@return map-get($type-scale, $level);
+}
+
+$base-font-size: 1.188rem;
+$base-line-height: $base-font-size * 1.5;
+
+$line-height: (
+	-2: $base-line-height,
+	-1: $base-line-height,
+	0: $base-line-height,
+	1: $base-line-height * 2,
+	2: $base-line-height * 2,
+	3: $base-line-height * 2,
+	4: $base-line-height * 3,
+	5: $base-line-height * 3
+);
+
+@function line-height($level) {
+	@return map-get($line-height, $level);
+}
+
+@mixin type-setting($level: 0) {
+	font-size: type-scale($level);
+	line-height: line-height($level);
+}
+
+@mixin type-scale($level: 0) {
+	font-size: type-scale($level);
+}
+
+@mixin line-height($level: 0) {
+	line-height: line-height($level);
+}
+
+h1, h2, h3 {
+	text-rendering: optimizeLegibility;
+	color: $heading-text-color;
+	text-align: center;
+	font-weight: 400;
+}
+
+h1 {
+	@include type-setting(4);
+}
+
+h2 {
+	@include type-scale(3);
+	@include line-height(0);
+	@media screen and (max-width: $smaller-view) {
+		@include line-height(1);
+	}
+}
+
+h3 {
+	@include type-setting(2);
+	@media screen and (max-width: $smaller-view) {
+		@include type-setting(1);
+	}
+}
+
+p {
+	margin-bottom: $base-line-height;
+}
+
+a {
+	text-decoration: none;
+}

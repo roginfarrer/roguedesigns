@@ -1,0 +1,78 @@
+// Pure CSS browser mockup
+// http://codepen.io/adrienjarthon/pen/ogjjoj
+
+.browser-mockup {
+	border-top: 2em solid rgba(230, 230, 230, 0.7);
+	border-left: 0.2em solid rgba(230, 230, 230, 0.7);
+	border-right: 0.2em solid rgba(230, 230, 230, 0.7);
+	border-bottom: 1em solid rgba(230, 230, 230, 0.7);
+	position: relative;
+	border-radius: 3px;
+	@media screen and (max-width: $small-view) {
+		border-top: 1.5em solid rgba(230, 230, 230, 0.7);
+		border-left: 0.2em solid rgba(230, 230, 230, 0.7);
+		border-right: 0.2em solid rgba(230, 230, 230, 0.7);
+		border-bottom: 0.5em solid rgba(230, 230, 230, 0.7);
+	}
+}
+
+.browser-mockup:before {
+	display: block;
+	position: absolute;
+	content: '';
+	top: -1.25em;
+	left: 1em;
+	width: 0.5em;
+	height: 0.5em;
+	border-radius: 50%;
+	background-color: #FB263E;
+	box-shadow: 0 0 0 2px #FB263E, 1.5em 0 0 2px #FDAC3C, 3em 0 0 2px #00CC00;
+	@media screen and (max-width: $small-view) {
+		top: -0.95em;
+		width: 0.4em;
+		height: 0.4em;
+	}
+}
+
+.browser-mockup.with-tab:after {
+	display: block;
+	position: absolute;
+	content: '';
+	top: -2em;
+	left: 5.5em;
+	width: 20%;
+	height: 0em;
+	border-bottom: 2em solid white;
+	border-left: 0.8em solid transparent;
+	border-right: 0.8em solid transparent;
+}
+
+.browser-mockup.with-url:after {
+	display: block;
+	position: absolute;
+	content: '';
+	top: -1.6em;
+	left: 5.5em;
+	width: calc(100% - 6em);
+	height: 1.2em;
+	border-radius: 2px;
+	background-color: white;
+	@media screen and (max-width: $small-view) {
+		height: 0.9em;
+		top: -1.2em;
+	}
+}
+
+.browser-mockup > * {
+	display: block;
+}
+
+.browser-mockup-shadow {
+	box-shadow: 0 0.1em 1em 0 rgba(0, 0, 0, 0.4);
+}
+
+.browser-mockup img,
+.portfolio-section img {
+	width: 100%;
+	margin: 0 auto;
+}

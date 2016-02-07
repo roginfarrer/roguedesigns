@@ -1,0 +1,84 @@
+.header-container {
+	background-color: $background;
+	border-bottom: 1px solid $accent;
+}
+
+header {
+	display: block;
+	margin: 0 auto;
+}
+
+.logo-container {
+	text-align: center;
+	display: block;
+	@media screen and (min-width: $small-view) {
+		float: left;
+	}
+}
+
+.mask-logo {
+	position: relative;
+	display: block;
+	height: auto;
+	transform: rotate(-5deg);
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: -($base-line-height);
+}
+
+.mask-color {
+	fill: $foreground;
+	&:hover {
+		fill: #fff;
+	}
+	@include transition(all 0.1s ease-out);
+}
+
+.logo-heading {
+	display: block;
+	color: $foreground;
+	display: inline-block;
+	@include type-scale(1);
+	@include line-height(0);
+	font-weight:400;
+	font-family: 'kalam';
+	&:hover {
+		color: #fff;
+	}
+	@include transition(all 0.1s ease-out);
+}
+
+nav {
+	@include type-setting(0);
+	display: block;
+	letter-spacing: 1px;
+	float: right;
+	margin-top: 2.5em;
+	ul {
+		list-style-type: none;
+		padding: 0;
+		li {
+			font-weight: bold;
+			display: inline-block;
+			margin-left: 2em;
+			text-transform: uppercase;
+			a, a:visited {
+				color: $foreground;
+				text-decoration: none;
+				@include transition(color 100ms ease-out);
+			}
+			a:hover {
+				color: #fff;
+			}
+		}
+	}
+	@media screen and (max-width: $small-view) {
+		float: none;
+		margin: 0 auto;
+		text-align: center;
+		@include type-scale(-1);
+		ul li:first-of-type {
+			margin-left: 0;
+		}
+	}
+}

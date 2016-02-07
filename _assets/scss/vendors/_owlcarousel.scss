@@ -1,0 +1,19 @@
+#owl-demo .item img{
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.portfolio-btn {
+	background-color: $primary;
+	color: $foreground;
+	@include border-radius(10px);
+	padding: 0.5em;
+	text-align: center;
+	margin: $base-line-height auto;
+	display: inline-block;
+}
+
+.owl-wrapper-outer {
+	box-shadow: 0 0.1em 1em 0 rgba(0, 0, 0, 0.4);
+}

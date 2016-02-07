@@ -1,0 +1,27 @@
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+	@return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+	@return mix(black, $color, $percentage);
+}
+
+$primary: #232F5A;
+$accent: #5C6FB4;
+$secondary: #111B41;
+$background: #131a30;
+$foreground: #99A8DD;
+$body-text-color: tint($primary, 20%);
+$heading-text-color: tint($primary, 10%);
+$off-white: #D4D6ED;
+$btn-bright: #3b5cd5;

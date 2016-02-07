@@ -1,0 +1,19 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Rogue Design Co.
+email: rogin@roginfarrer.com
+description: We are a small web design service based in Boston, MA. We work with small businesses and individuals to make web sites that tell their story.
+root_desc: "Rogue Design Co. — Web Design"
+base_url: "" # the subpath of your site, e.g. /blog
+url: "http://roguedesign.co" # the base hostname & protocol for your site
+permalink:     /:title.html
+
+# Build settings
+markdown: kramdown
+exclude: ["node_modules", "gulpfile.js", "package.json", "config.rb", "s3_website.yml"]

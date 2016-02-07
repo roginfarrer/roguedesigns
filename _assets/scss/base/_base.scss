@@ -1,0 +1,17 @@
+body {
+	font-family: 'source sans pro', helvetica, sans-serif;
+	color: $body-text-color;
+	font-size: $base-font-size;
+}
+
+.container {
+	width: 100%;
+	display: block;
+}
+
+.page-wrapper {
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	display: block;
+}

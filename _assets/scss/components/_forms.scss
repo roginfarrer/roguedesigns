@@ -1,0 +1,79 @@
+#contact-form {
+	margin: $base-line-height*2 auto 0;
+	text-align: center;
+}
+
+#contact-form label {
+	display: none;
+}
+
+#contact-form textarea {
+	width: 100%;
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form input[type="tel"],
+#contact-form input[type="url"] {
+	width: 100%;
+}
+
+.contact-form-name {
+	@media screen and (min-width: $small-view) {
+		margin-right: 6%;
+	}
+}
+
+.contact-form-name,
+.contact-form-email {
+	width: 47%;
+	float: left;
+	@media screen and (max-width: $small-view) {
+		width: auto;
+		float: none;
+	}
+}
+
+.contact-form-url {
+	margin: 0 auto $base-line-height;
+	@media screen and (min-width: $small-view) {
+		width: 50%;
+		input {
+			text-align: center;
+		}
+	}
+}
+
+.contact-form-message,
+.contact-form-name,
+.contact-form-email,
+.contact-form-url {
+	margin-bottom: $base-line-height / 2;
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form input[type="tel"],
+#contact-form input[type="url"],
+#contact-form textarea {
+	background: tint($foreground, 80%);
+	border:1px solid tint($foreground, 40%);
+	padding:10px;
+	@include border-radius(5px);
+	@include transition(all 0.1s ease-out);
+	-webkit-appearance: textfield;
+}
+
+@include placeholder {
+	color: $foreground;
+}
+
+#contact-form input:focus, #contact-form textarea:focus {
+	border-color: $btn-bright;
+	box-shadow: 0 0 0 2px $btn-bright;
+	outline: none;
+}
+
+.collapse {
+	display: none;
+}

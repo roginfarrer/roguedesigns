@@ -1,0 +1,51 @@
+---
+layout: home
+title: Contact
+---
+
+<section>
+	<div class="margin-container">
+		<div class="section-header">
+			<h2>Say hello.</h2>
+			<p class="t-center">Let's talk about your project. We'll get back to you as soon as we can. If you don't like web forms, you can also shoot us an email at <a href="mailto:hello@roguedesign.co" title="Contact RDC">hello@roguedesign.co</a>.</p>
+		</div>
+		<div id="form-messages"></div>
+		<form class="margin-container" id="contact-form" name="form">
+			<div class="contact-form-name">
+				<label>Name</label>
+				<input placeholder="Name" name="name" type="text" tabindex="1" required>
+			</div>
+			<div class="contact-form-email">
+				<label>Email</label>
+				<input placeholder="E-mail" name="_replyto" type="email" tabindex="2" required>
+			</div>
+			<div class="contact-form-message">
+				<label>Message</label>
+				<textarea placeholder="Tell us about your project..." type="text" name="message" tabindex="3" rows="5" required></textarea>
+			</div>
+			<div class="contact-form-url">
+				<label>URL</label>
+				<input placeholder="Website URL (if you have one)" type="url" name="url" tabindex="4">
+			</div>
+			<input type="hidden" name="_subject" value="New RoginFarrer.com submission" />
+
+			<input type="text" name="_gotcha" style="display:none" />
+			<div>
+				<button type="submit" id="contact-submit" class="btn btn-bright"><i class="fa fa-envelope"></i> Send Message</button>
+			</div>
+		</form>
+
+		<!-- Hidden message to show if contact is successful. -->
+		<div id="submit-success" class="collapse">
+			<h3 style="text-align:center;">Message received! I'll be in touch.</h3>
+		</div>
+
+		<!-- Hidden message to show if user encounters errors. -->
+		<div id="submit-errors" class="collapse">
+			It looks like there was an error submitting the form.
+			Please try again later.
+		</div>
+
+		<br />
+	</div>
+</section>

@@ -1,0 +1,29 @@
+.portfolio-section {
+	margin-top: $base-line-height * 2;
+	margin-bottom: $base-line-height*3;
+}
+
+.project-title {
+	margin-top: $base-line-height/2;
+	h4 {
+		display: inline-block;
+		@include type-scale(1);
+		line-height: 0;
+		font-weight: 400;
+		margin-bottom: $base-line-height/2;
+		a, a:visited {
+			color: $heading-text-color;
+			@include transition(all 200ms ease-out);
+		}
+		a:hover {
+			color: $accent;
+		}
+	}
+}
+
+.visit-the-site {
+	float: right;
+	position: relative;
+	top: 23px;
+	margin: 0;
+}

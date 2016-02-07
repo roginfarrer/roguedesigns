@@ -1,0 +1,43 @@
+button {
+	outline: none;
+	border: none;
+}
+
+.btn {
+	@include border-radius(5px);
+	padding: 0.5em 1em;
+	margin: $base-line-height auto;
+	display: inline-block;
+	width: auto;
+	@media screen and (max-width: $smaller-view) {
+		margin-top: 0;
+	}
+}
+
+.btn-bright {
+	background-color: $btn-bright;
+	color: #fff;
+	@include transition(all 0.1s ease-out);
+	&:hover {
+		background-color: tint($btn-bright, 10%);
+	}
+}
+
+.btn-grey {
+	background-color: tint($accent, 70%);
+	color: $primary;
+	@include transition(all 0.1s ease-out);
+	&:hover {
+		background-color: tint($accent, 60%);
+	}
+}
+
+.btn-small {
+	@include border-radius(5px);
+	padding: 0.5em 1em;
+	margin: $base-line-height auto;
+	display: inline-block;
+	font-weight: 600;
+	text-transform: uppercase;
+	@include type-scale(-2);
+}

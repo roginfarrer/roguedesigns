@@ -1,0 +1,25 @@
+@import 'header';
+@import 'footer';
+
+.margin-container  {
+	width: 80%;
+	max-width: 700px;
+	margin: 0 auto;
+	overflow: visible;
+	@media screen and (max-width: $small-view) {
+		width: 90%;
+	}
+}
+
+.margin-container:before, .margin-container:after {
+	content: " ";
+	display: table;
+}
+
+.margin-container:after {
+	clear: both;
+}
+
+section {
+	display: block;
+}

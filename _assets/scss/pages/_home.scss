@@ -1,0 +1,84 @@
+.hero {
+	width: 100%; 
+	height: $base-line-height * 15;
+}
+
+.hero {
+	background: #2a43a2 url('/assets/img/hero-gradient.png') center center no-repeat;
+}
+
+.hero-header {
+	padding-top: $base-line-height;
+	@media screen and (max-width: $smaller-view) {
+		padding-top: 0;
+	}
+}
+
+.hero-subhead, 
+.hero-header {
+	color: #fff;
+}
+
+.content-section-light {
+	border-top: 1px solid tint($foreground, 50%);
+	border-bottom: 1px solid tint($foreground, 50%);
+	background: tint($foreground, 85%);
+}
+
+.content-section-dark {
+	background: $background;
+	h2 {
+		color: $foreground;
+	}
+	p {
+		color: $accent;
+	}
+}
+
+.section-header {
+	padding-top: $base-line-height;
+	a {
+		color: $btn-bright;
+		font-weight: bolder;
+		@include transition(all 200ms ease-out);
+	}
+	a:hover {
+		color: $foreground;
+		@include transition(all 200ms ease-out);
+		border-bottom: 2px solid tint($foreground, 50%);
+	}
+}
+
+.service-list {
+	list-style-type: none;
+	margin-bottom: $base-line-height * 2;
+}
+
+.service {
+	background-image: url('/assets/img/star2.png');
+	background-repeat: no-repeat;
+	background-position: 0px 2px;
+	padding-left: 37px;
+	margin-left: -4em;
+	h4 {
+		@include type-scale(1);
+		@include line-height(0);
+		margin-bottom: 0;
+		margin-top: $base-line-height;
+	}
+	p {
+		margin: 0;
+	}
+	@media screen and (max-width: $small-view) {
+		margin-left: -2em;
+	}
+}
+
+.get-in-touch {
+	background-color: $primary;
+	color: $foreground;
+	@include border-radius(5px);
+	padding: 0.5em 0.75em;
+	margin: $base-line-height auto;
+	display: inline-block;
+}
