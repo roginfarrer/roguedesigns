@@ -1,11 +1,43 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync');
-var sass        = require('gulp-sass')
-var prefix      = require('gulp-autoprefixer');
-var minifyCSS   = require('gulp-minify-css');
-var cp          = require('child_process');
-var imagemin    = require('gulp-imagemin');
-var pngquant    = require('imagemin-pngquant');
+// Base
+var gulp        = require('gulp'),
+    cp          = require('child_process'),
+
+// Browser Sync
+    browserSync = require('browser-sync'),
+
+// Stylesheets
+    sass        = require('gulp-sass'),
+    prefix      = require('gulp-autoprefixer'),
+    cssMin      = require('gulp-cssnano'),
+
+// Images
+    imgMin      = require('gulp-imagemin'),
+    pngquant    = require('imagemin-pngquant'),
+
+// Javascript
+    uglify       = require('gulp-uglify'),
+//    jshint      = require('gulp-jshint')
+    concat		  = require('gulp-concat'),
+		rename      = require('gulp-rename'),
+		sourcemaps  = require('gulp-sourcemaps'),
+
+// HTML
+    htmlMin     = require('gulp-htmlmin'),
+		
+// Input & Output
+		input = {
+			'sass': '_assets/scss/**/*.scss',
+			'javascript': '_assets/js/*.js',
+			'image': '_assets/img/**/*',
+			'html': './_site/**/*.html',
+		},
+
+			output = {
+			'stylesheets': 'assets/css',
+			'javascript': 'assets/js',
+			'html': './_site/',
+			'image': 'assets/img'
+		};
 
 var messages = {
 	jekyllBuild: '<span style="color: grey">Running:</span> $ jekyll build'
@@ -30,7 +62,7 @@ gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
 /**
  * Wait for jekyll-build, then launch the Server
  */
-gulp.task('browser-sync', ['sass', 'imagemin', 'jekyll-build'], function() {
+gulp.task('browser-sync', ['sass', 'imgMin', 'js', 'htmlMin', 'jekyll-build'], function() {
 	browserSync({
 		server: {
 			baseDir: '_site'
@@ -43,32 +75,71 @@ gulp.task('browser-sync', ['sass', 'imagemin', 'jekyll-build'], function() {
  */
 
 gulp.task('sass', function () {
-	return gulp.src('_assets/scss/**/*.scss')
+	return gulp.src(input.sass)
 		.pipe(sass({
 			includePaths: ['scss'],
 			onError: browserSync.notify
 	}).on('error', sass.logError))
-		.pipe(prefix("last 1 version", "> 1%", "ie 8", "ie 7"))
-		.pipe(minifyCSS())
+		.pipe(prefix("last 2 versions", "> 1%", "ie 8", "ie 7"))
+		.pipe(cssMin())
 		.pipe(gulp.dest('_site/assets/css'))
 		.pipe(browserSync.reload({stream:true}))
-		.pipe(gulp.dest('assets/css'));
+		.pipe(gulp.dest(output.stylesheets));
+});
+
+/**
+ * Minify .js files
+ */
+
+gulp.task('js', function() {
+	return gulp.src(input.javascript)
+		.pipe(sourcemaps.init())
+		.pipe(concat('bundle.js'))
+		.pipe(gulp.dest('_assets/js'))
+		.pipe(rename('bundle.min.js'))
+		.pipe(uglify())
+		.pipe(sourcemaps.write('./'))
+		.pipe(browserSync.reload({stream:true}))
+		.pipe(gulp.dest(output.javascript));
+});
+
+/**
+ * Minify .html files
+ */
+
+gulp.task('htmlMin', function() {
+	return gulp.src(input.html)
+		.pipe(htmlMin({
+			collapseWhitespace: true,
+			removeComments: true,
+			conservativeCollapse: true,
+			collapseBooleanAttributes: true,
+//			removeRedundantAttributes: true,
+			removeEmptyAttributes: true,
+			removeEmptyElements: true,
+			lint: false,
+			minifyJS: true,
+			minifyCSS: true,
+			onError: browserSync.notify
+		}).on('error', sass.logError))
+		.pipe(browserSync.reload({stream:true}))
+		.pipe(gulp.dest(output.html));
 });
 
 /*
  * Minify images in build folder and produce in production folder
  */
 
-gulp.task('imagemin', function () {
-	return gulp.src('_assets/img/**/*')
-		.pipe(imagemin({
+gulp.task('imgMin', function () {
+	return gulp.src(input.image)
+		.pipe(imgMin({
 		progressive: true,
 		svgoPlugins: [{removeViewBox: false}],
 		use: [pngquant()]
 	}))
 		.pipe(gulp.dest('_site/assets/img'))
 		.pipe(browserSync.reload({stream:true}))
-		.pipe(gulp.dest('assets/img'));
+		.pipe(gulp.dest(output.image));
 });
 
 /**
@@ -76,9 +147,10 @@ gulp.task('imagemin', function () {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-	gulp.watch('_assets/scss/**/*.scss', ['sass'])
-	gulp.watch(['_assets/img/**/*'], ['imagemin']);
-	gulp.watch(['*.html', '_layouts/*.html', '_includes/*.html', '_posts/*', '_config.yml', '**/*.html', '!_site/**/*.*'], ['jekyll-rebuild']);
+	gulp.watch(input.sass, ['sass']);
+	gulp.watch(input.javascript, ['js'])
+	gulp.watch(input.image, ['imgMin']);
+	gulp.watch(['*.html', '_layouts/*.html', '_includes/*.html', '_posts/*', '_config.yml', '**/*.html', '!_site/**/*.*'], ['htmlMin'], ['jekyll-rebuild']);
 });
 
 /**
