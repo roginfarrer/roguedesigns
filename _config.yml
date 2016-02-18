@@ -10,8 +10,8 @@ title: Rogue Design Co.
 email: rogin@roginfarrer.com
 description: We are a small web design service based in Boston, MA. We work with small businesses and individuals to make web sites that tell their story.
 root_desc: "Rogue Design Co. — Web Design"
-base_url: "" # the subpath of your site, e.g. /blog
 url: "http://roguedesign.co" # the base hostname & protocol for your site
+baseurl: "/"
 permalink:     /:title.html
 
 # Build settings

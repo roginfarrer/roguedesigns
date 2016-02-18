@@ -1,7 +1,7 @@
-@import "owlcarousel";
+@import "owlcarousel/all";
 @import "browsermock";
 
 .animated,
 .fadeInLeft {
-	transform: translateZ(0);
+	transform: translate3d(0,0,0);
 }

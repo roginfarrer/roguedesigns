@@ -7,15 +7,22 @@
 	display: none;
 }
 
-#contact-form textarea {
-	width: 100%;
-}
-
 #contact-form input[type="text"],
 #contact-form input[type="email"],
 #contact-form input[type="tel"],
-#contact-form input[type="url"] {
+#contact-form input[type="url"],
+#contact-form textarea {
 	width: 100%;
+	margin-bottom: $base-line-height / 2;
+	background: tint($foreground, 80%);
+	border:1px solid tint($foreground, 40%);
+	padding:10px;
+	@include border-radius(5px);
+	@include transition(all 0.1s ease-out);
+	-webkit-appearance: textfield;
+	@media (max-width: $small-view) {
+		width: 90%;
+	}
 }
 
 .contact-form-name {
@@ -35,20 +42,16 @@
 }
 
 .contact-form-url {
-	margin: 0 auto $base-line-height;
+	@media screen and (max-width: $smaller-view) {
+		margin-bottom: $base-line-height;
+	}
 	@media screen and (min-width: $small-view) {
 		width: 50%;
+		margin: 0 auto;
 		input {
 			text-align: center;
 		}
 	}
-}
-
-.contact-form-message,
-.contact-form-name,
-.contact-form-email,
-.contact-form-url {
-	margin-bottom: $base-line-height / 2;
 }
 
 #contact-form input[type="text"],
@@ -56,12 +59,7 @@
 #contact-form input[type="tel"],
 #contact-form input[type="url"],
 #contact-form textarea {
-	background: tint($foreground, 80%);
-	border:1px solid tint($foreground, 40%);
-	padding:10px;
-	@include border-radius(5px);
-	@include transition(all 0.1s ease-out);
-	-webkit-appearance: textfield;
+
 }
 
 @include placeholder {

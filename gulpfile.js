@@ -9,6 +9,7 @@ var gulp        = require('gulp'),
     sass        = require('gulp-sass'),
     prefix      = require('gulp-autoprefixer'),
     cssMin      = require('gulp-cssnano'),
+		uncss				= require('gulp-uncss'),
 
 // Images
     imgMin      = require('gulp-imagemin'),
@@ -62,7 +63,7 @@ gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
 /**
  * Wait for jekyll-build, then launch the Server
  */
-gulp.task('browser-sync', ['sass', 'imgMin', 'js', 'htmlMin', 'jekyll-build'], function() {
+gulp.task('browser-sync', ['htmlMin', 'sass', 'imgMin', 'js', 'jekyll-build'], function() {
 	browserSync({
 		server: {
 			baseDir: '_site'
@@ -92,15 +93,15 @@ gulp.task('sass', function () {
  */
 
 gulp.task('js', function() {
-	return gulp.src(input.javascript)
+	return gulp.src([input.javascript, '!_assets/js/bundle.js'])
 		.pipe(sourcemaps.init())
-		.pipe(concat('bundle.js'))
-		.pipe(gulp.dest('_assets/js'))
-		.pipe(rename('bundle.min.js'))
-		.pipe(uglify())
+			.pipe(concat('bundle.js'))
+			.pipe(gulp.dest('_assets/js'))
+			.pipe(rename('bundle.min.js'))
+			.pipe(uglify())
 		.pipe(sourcemaps.write('./'))
-		.pipe(browserSync.reload({stream:true}))
-		.pipe(gulp.dest(output.javascript));
+		.pipe(gulp.dest(output.javascript))
+		.pipe(browserSync.reload({stream:true}));
 });
 
 /**
@@ -112,12 +113,12 @@ gulp.task('htmlMin', function() {
 		.pipe(htmlMin({
 			collapseWhitespace: true,
 			removeComments: true,
-			conservativeCollapse: true,
-			collapseBooleanAttributes: true,
+//			conservativeCollapse: true,
+//			collapseBooleanAttributes: true,
 //			removeRedundantAttributes: true,
-			removeEmptyAttributes: true,
-			removeEmptyElements: true,
-			lint: false,
+//			removeEmptyAttributes: true,
+//			removeEmptyElements: true,
+//			lint: false,
 			minifyJS: true,
 			minifyCSS: true,
 			onError: browserSync.notify
@@ -138,8 +139,8 @@ gulp.task('imgMin', function () {
 		use: [pngquant()]
 	}))
 		.pipe(gulp.dest('_site/assets/img'))
-		.pipe(browserSync.reload({stream:true}))
-		.pipe(gulp.dest(output.image));
+		.pipe(gulp.dest(output.image))
+		.pipe(browserSync.reload({stream:true}));
 });
 
 /**
@@ -150,7 +151,7 @@ gulp.task('watch', function () {
 	gulp.watch(input.sass, ['sass']);
 	gulp.watch(input.javascript, ['js'])
 	gulp.watch(input.image, ['imgMin']);
-	gulp.watch(['*.html', '_layouts/*.html', '_includes/*.html', '_posts/*', '_config.yml', '**/*.html', '!_site/**/*.*'], ['htmlMin'], ['jekyll-rebuild']);
+	gulp.watch(['*.html', '_layouts/*.html', '_includes/*.html', '_posts/*', '_config.yml', '**/*.html', '!_site/**/*.*'], ['htmlMin', 'jekyll-rebuild']);
 });
 
 /**
